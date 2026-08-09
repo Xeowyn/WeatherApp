@@ -2,6 +2,25 @@
 
 A simple weather app made with React and TypeScript.
 
+## How to run it
+
+**Easiest way — just open the file:**
+
+Download this repo and open `dist/index.html` in your browser. Nothing to install.
+
+**Or run it in dev mode:**
+
+```bash
+git clone https://github.com/Xeowyn/WeatherApp.git
+cd WeatherApp
+npm install
+npm run dev
+```
+
+Then open [http://localhost:5173](http://localhost:5173) in your browser.
+
+## What it does
+
 Type in any city and see what the weather is like right now, plus a 7-day forecast. You don't need an API key or sign-up — all the weather data comes free from [Open-Meteo](https://open-meteo.com/).
 
 ## What it can do
@@ -19,23 +38,6 @@ Type in any city and see what the weather is like right now, plus a 7-day foreca
 - [Vite](https://vitejs.dev/) to build and bundle the app
 - [Open-Meteo](https://open-meteo.com/) for weather data — free, no key needed
 - [Open-Meteo Geocoding](https://open-meteo.com/en/docs/geocoding-api) to turn a city name into a location
-
-## How to run it
-
-**Easiest way — just open the file:**
-
-Download this repo and open `dist/index.html` in your browser. Nothing to install.
-
-**Or run it in dev mode:**
-
-```bash
-git clone https://github.com/Xeowyn/WeatherApp.git
-cd WeatherApp
-npm install
-npm run dev
-```
-
-Then open [http://localhost:5173](http://localhost:5173) in your browser.
 
 ## Building it yourself
 
