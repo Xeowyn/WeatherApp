@@ -28,8 +28,8 @@ Download the repo and open `dist/index.html` in your browser. That's it.
 **Option 2 — Dev mode:**
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/weather-app.git
-cd weather-app
+git clone https://github.com/Xeowyn/WeatherApp.git
+cd WeatherApp
 npm install
 npm run dev
 ```
