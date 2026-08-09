@@ -1,5 +1,5 @@
 import type { WeatherData, TemperatureUnit } from "../types/weather";
-import { getWeatherDescription, getWeatherEmoji, formatTime } from "./weatherUtils";
+import { getWeatherDescription, getWeatherEmoji, formatTime, getUnitSymbol } from "./weatherUtils";
 
 interface Props {
   data: WeatherData;
@@ -9,7 +9,7 @@ interface Props {
 
 export function CurrentWeather({ data, unit, onToggleUnit }: Props) {
   const { current, location, daily } = data;
-  const unitSymbol = unit === "celsius" ? "°C" : "°F";
+  const unitSymbol = getUnitSymbol(unit);
   const description = getWeatherDescription(current.weatherCode);
   const emoji = getWeatherEmoji(current.weatherCode, current.isDay);
 

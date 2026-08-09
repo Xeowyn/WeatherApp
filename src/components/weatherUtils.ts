@@ -1,3 +1,9 @@
+import type { TemperatureUnit } from "../types/weather";
+
+export function getUnitSymbol(unit: TemperatureUnit): string {
+  return unit === "celsius" ? "°C" : "°F";
+}
+
 export function getWeatherDescription(code: number): string {
   if (code === 0) return "Clear sky";
   if (code === 1) return "Mainly clear";

@@ -1,5 +1,5 @@
 import type { DailyForecast, TemperatureUnit } from "../types/weather";
-import { getWeatherEmoji, formatDay } from "./weatherUtils";
+import { getWeatherEmoji, formatDay, getUnitSymbol } from "./weatherUtils";
 
 interface Props {
   daily: DailyForecast;
@@ -7,7 +7,7 @@ interface Props {
 }
 
 export function Forecast({ daily, unit }: Props) {
-  const unitSymbol = unit === "celsius" ? "°C" : "°F";
+  const unitSymbol = getUnitSymbol(unit);
 
   return (
     <div className="forecast">
