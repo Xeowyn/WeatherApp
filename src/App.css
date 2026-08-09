@@ -1,4 +1,4 @@
-/* ── Reset & base ──────────────────────────────── */
+/* Reset & base */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
@@ -21,7 +21,7 @@ body {
   min-height: 100vh;
 }
 
-/* ── App layout ────────────────────────────────── */
+/* App layout */
 .app {
   min-height: 100vh;
   display: flex;
@@ -66,7 +66,7 @@ body {
 .app-footer a { color: var(--accent); text-decoration: none; }
 .app-footer a:hover { color: var(--accent-hover); }
 
-/* ── Search ────────────────────────────────────── */
+/* Search */
 .search-container {
   position: relative;
   max-width: 480px;
@@ -123,7 +123,7 @@ body {
 .suggestion-name { font-weight: 500; }
 .suggestion-sub { font-size: 0.82rem; color: var(--text-muted); }
 
-/* ── State messages ────────────────────────────── */
+/* State messages */
 .state-message {
   display: flex;
   flex-direction: column;
@@ -148,7 +148,7 @@ body {
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* ── Current weather card ──────────────────────── */
+/* Current weather card */
 .current-weather {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -246,7 +246,7 @@ body {
 .stat-value { font-weight: 600; font-size: 0.95rem; }
 .stat-label { font-size: 0.75rem; color: var(--text-muted); }
 
-/* ── Forecast ──────────────────────────────────── */
+/* Forecast */
 .forecast {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -306,7 +306,7 @@ body {
   font-weight: 500;
 }
 
-/* ── Sky Panel ─────────────────────────────────── */
+/* Sky Panel */
 .sky-panel {
   background: linear-gradient(160deg, #0d1224 0%, #141828 60%, #1a1230 100%);
   border: 1px solid rgba(167,139,250,0.2);
@@ -535,7 +535,7 @@ body {
   margin: 2px 0;
 }
 
-/* ── Responsive ────────────────────────────────── */
+/* Responsive */
 @media (max-width: 640px) {
   .app-title { font-size: 1.5rem; }
   .search-container { max-width: 100%; }

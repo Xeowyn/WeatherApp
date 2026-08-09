@@ -39,7 +39,6 @@ export function SkyPanel({ data }: Props) {
 
       <div className="sky-grid">
 
-        {/* Moon Phase */}
         <div className="sky-card">
           <div className="sky-card-header">
             <span className="sky-icon">🌙</span>
@@ -61,7 +60,6 @@ export function SkyPanel({ data }: Props) {
           </div>
         </div>
 
-        {/* Stargazing */}
         <div className="sky-card">
           <div className="sky-card-header">
             <span className="sky-icon">⭐</span>
@@ -79,7 +77,6 @@ export function SkyPanel({ data }: Props) {
           <p className="stargaze-cloud">Cloud cover: {data.current.cloudCover}%</p>
         </div>
 
-        {/* Golden Hour */}
         <div className="sky-card">
           <div className="sky-card-header">
             <span className="sky-icon">🌅</span>
@@ -101,7 +98,6 @@ export function SkyPanel({ data }: Props) {
           </div>
         </div>
 
-        {/* Upcoming Events */}
         <div className="sky-card">
           <div className="sky-card-header">
             <span className="sky-icon">🔭</span>

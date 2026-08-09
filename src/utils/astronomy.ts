@@ -1,14 +1,14 @@
-// ── Moon Phase ───────────────────────────────────────────────────────────────
+// Moon phase
 
-const SYNODIC_PERIOD = 29.53058867; // days
-// Reference new moon: Jan 6, 2000 at 18:14 UTC
+const SYNODIC_PERIOD = 29.53058867; // days in a full moon cycle
+// A known new moon date and time, used as the starting point for the math below
 const REFERENCE_NEW_MOON = new Date("2000-01-06T18:14:00Z").getTime();
 
 export interface MoonPhaseData {
-  phase: number;         // days since last new moon (0–29.53)
+  phase: number;         // days since the last new moon (0–29.53)
   name: string;
   emoji: string;
-  illumination: number;  // 0–100 %
+  illumination: number;  // how lit up the moon looks, 0–100 %
   daysToFull: number;
   daysToNew: number;
 }
@@ -35,7 +35,7 @@ export function getMoonPhase(date: Date = new Date()): MoonPhaseData {
   return { phase, name, emoji, illumination, daysToFull, daysToNew };
 }
 
-// ── Golden Hour / Blue Hour ──────────────────────────────────────────────────
+// Golden hour and blue hour
 
 export interface GoldenHourData {
   morningBlueStart: string;
@@ -67,7 +67,7 @@ export function getGoldenHours(sunriseIso: string, sunsetIso: string): GoldenHou
   };
 }
 
-// ── Solar Eclipses ───────────────────────────────────────────────────────────
+// Solar eclipses
 
 export interface SolarEclipse {
   date: string;
@@ -104,7 +104,7 @@ export function getNextSolarEclipse(now: Date = new Date()): SolarEclipse {
   return { ...last, displayDate: last.date, daysUntil: 0 };
 }
 
-// ── Meteor Showers ───────────────────────────────────────────────────────────
+// Meteor showers
 
 export interface MeteorShower {
   name: string;
@@ -141,7 +141,7 @@ export function getNextMeteorShower(now: Date = new Date()): MeteorShower {
       }
     }
   }
-  // Wrap to next Quadrantids (should never reach here within 1-year offset)
+  // Fallback in case nothing matched above (shouldn't normally happen)
   const next = new Date(now.getFullYear() + 1, 0, 3, 12, 0, 0);
   return {
     name: "Quadrantids",
@@ -152,10 +152,10 @@ export function getNextMeteorShower(now: Date = new Date()): MeteorShower {
   };
 }
 
-// ── Stargazing Index ─────────────────────────────────────────────────────────
+// Stargazing score
 
 export interface StargazingIndex {
-  score: number;   // 0–10
+  score: number;   // 0 (bad) to 10 (great)
   label: string;
   color: string;
   tip: string;
