@@ -1,12 +1,32 @@
 import { useState, useCallback } from "react";
 import type { WeatherData, GeoLocation, TemperatureUnit } from "../types/weather";
 
+const REQUEST_TIMEOUT_MS = 10_000;
+
+// The Open-Meteo APIs are outside our control, so if a request hangs
+// (bad wifi, server trouble) we give up after a while instead of
+// leaving the app stuck on "Loading..." forever.
+async function fetchWithTimeout(url: string): Promise<Response> {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+  try {
+    return await fetch(url, { signal: controller.signal });
+  } catch (e) {
+    if (e instanceof DOMException && e.name === "AbortError") {
+      throw new Error("The request took too long. Please try again.");
+    }
+    throw e;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 async function searchLocations(query: string): Promise<GeoLocation[]> {
   const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=5&language=en&format=json`;
-  const res = await fetch(url);
+  const res = await fetchWithTimeout(url);
   if (!res.ok) throw new Error("Location search failed");
   const data = await res.json();
-  if (!data.results) return [];
+  if (!Array.isArray(data.results)) return [];
   return data.results.map((r: Record<string, unknown>) => ({
     name: r.name as string,
     latitude: r.latitude as number,
@@ -14,6 +34,23 @@ async function searchLocations(query: string): Promise<GeoLocation[]> {
     country: r.country as string,
     admin1: r.admin1 as string | undefined,
   }));
+}
+
+// Checks that the weather response actually has the fields we need
+// before we trust it. The API is outside our control, so its response
+// could be missing pieces or shaped differently than we expect.
+function isValidWeatherPayload(data: unknown): boolean {
+  if (!data || typeof data !== "object") return false;
+  const d = data as Record<string, unknown>;
+  const current = d.current as Record<string, unknown> | undefined;
+  const daily = d.daily as Record<string, unknown> | undefined;
+  return (
+    typeof d.timezone === "string" &&
+    !!current &&
+    typeof current.temperature_2m === "number" &&
+    !!daily &&
+    Array.isArray(daily.time)
+  );
 }
 
 async function fetchWeather(
@@ -33,9 +70,13 @@ async function fetchWeather(
     `&timezone=auto` +
     `&forecast_days=7`;
 
-  const res = await fetch(url);
+  const res = await fetchWithTimeout(url);
   if (!res.ok) throw new Error("Weather fetch failed");
   const data = await res.json();
+
+  if (!isValidWeatherPayload(data)) {
+    throw new Error("Couldn't understand the weather data. Please try again.");
+  }
 
   return {
     location,
