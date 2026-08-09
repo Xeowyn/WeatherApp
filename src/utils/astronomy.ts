@@ -48,6 +48,9 @@ export interface GoldenHourData {
   eveningBlueEnd: string;
 }
 
+const BLUE_HOUR_MINUTES = 30;
+const GOLDEN_HOUR_MINUTES = 60;
+
 function shiftTime(isoStr: string, minutes: number): string {
   const d = new Date(isoStr);
   d.setMinutes(d.getMinutes() + minutes);
@@ -56,14 +59,14 @@ function shiftTime(isoStr: string, minutes: number): string {
 
 export function getGoldenHours(sunriseIso: string, sunsetIso: string): GoldenHourData {
   return {
-    morningBlueStart:  shiftTime(sunriseIso, -30),
+    morningBlueStart:  shiftTime(sunriseIso, -BLUE_HOUR_MINUTES),
     morningBlueEnd:    shiftTime(sunriseIso,   0),
     morningGoldStart:  shiftTime(sunriseIso,   0),
-    morningGoldEnd:    shiftTime(sunriseIso,  60),
-    eveningGoldStart:  shiftTime(sunsetIso,  -60),
+    morningGoldEnd:    shiftTime(sunriseIso,  GOLDEN_HOUR_MINUTES),
+    eveningGoldStart:  shiftTime(sunsetIso,  -GOLDEN_HOUR_MINUTES),
     eveningGoldEnd:    shiftTime(sunsetIso,    0),
     eveningBlueStart:  shiftTime(sunsetIso,    0),
-    eveningBlueEnd:    shiftTime(sunsetIso,   30),
+    eveningBlueEnd:    shiftTime(sunsetIso,   BLUE_HOUR_MINUTES),
   };
 }
 

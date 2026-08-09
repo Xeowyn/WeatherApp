@@ -13,11 +13,7 @@ export default function App() {
     <div className="app">
       <header className="app-header">
         <h1 className="app-title">Weather</h1>
-        <SearchBar
-          onSearch={search}
-          onSelect={(loc) => selectLocation(loc)}
-          suggestions={suggestions}
-        />
+        <SearchBar onSearch={search} onSelect={selectLocation} suggestions={suggestions} />
       </header>
 
       <main className="app-main">

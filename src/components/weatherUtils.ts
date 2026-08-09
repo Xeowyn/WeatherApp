@@ -21,7 +21,7 @@ export function getWeatherDescription(code: number): string {
 
 export function getWeatherEmoji(code: number, isDay = 1): string {
   if (code === 0) return isDay ? "☀️" : "🌙";
-  if (code <= 2) return isDay ? "🌤️" : "🌤️";
+  if (code <= 2) return isDay ? "🌤️" : "🌙";
   if (code === 3) return "☁️";
   if (code <= 49) return "🌫️";
   if (code <= 57) return "🌦️";

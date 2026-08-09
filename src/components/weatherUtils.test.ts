@@ -64,6 +64,12 @@ describe("getWeatherEmoji", () => {
     expect(getWeatherEmoji(96)).toBe("⛈️");
   });
 
+  it("shows a different icon at night for mainly clear / partly cloudy codes", () => {
+    expect(getWeatherEmoji(1, 1)).toBe("🌤️");
+    expect(getWeatherEmoji(1, 0)).toBe("🌙");
+    expect(getWeatherEmoji(2, 0)).toBe("🌙");
+  });
+
   it("falls back to a thermometer for codes outside the documented range", () => {
     expect(getWeatherEmoji(150)).toBe("🌡️");
   });

@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import type { GeoLocation } from "../types/weather";
 
+const SEARCH_DEBOUNCE_MS = 350;
+
 interface Props {
   onSearch: (query: string) => void;
   onSelect: (location: GeoLocation) => void;
@@ -20,7 +22,7 @@ export function SearchBar({ onSearch, onSelect, suggestions }: Props) {
     debounceRef.current = setTimeout(() => {
       onSearch(q);
       setOpen(true);
-    }, 350);
+    }, SEARCH_DEBOUNCE_MS);
   }
 
   function handleSelect(loc: GeoLocation) {

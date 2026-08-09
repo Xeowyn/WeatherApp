@@ -2,6 +2,8 @@ import { useState, useCallback } from "react";
 import type { WeatherData, GeoLocation, TemperatureUnit } from "../types/weather";
 
 const REQUEST_TIMEOUT_MS = 10_000;
+const MAX_SUGGESTIONS = 5;
+const FORECAST_DAYS = 7;
 
 // The Open-Meteo APIs are outside our control, so if a request hangs
 // (bad wifi, server trouble) we give up after a while instead of
@@ -22,7 +24,7 @@ async function fetchWithTimeout(url: string): Promise<Response> {
 }
 
 async function searchLocations(query: string): Promise<GeoLocation[]> {
-  const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=5&language=en&format=json`;
+  const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=${MAX_SUGGESTIONS}&language=en&format=json`;
   const res = await fetchWithTimeout(url);
   if (!res.ok) throw new Error("Location search failed");
   const data = await res.json();
@@ -68,7 +70,7 @@ async function fetchWeather(
     `&temperature_unit=${tempUnit}` +
     `&wind_speed_unit=${windUnit}` +
     `&timezone=auto` +
-    `&forecast_days=7`;
+    `&forecast_days=${FORECAST_DAYS}`;
 
   const res = await fetchWithTimeout(url);
   if (!res.ok) throw new Error("Weather fetch failed");
