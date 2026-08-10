@@ -2,7 +2,11 @@
 
 A simple weather app made with React and TypeScript.
 
-## How to run it
+## Try it now
+
+**[xeowyn.github.io/WeatherApp](https://xeowyn.github.io/WeatherApp/)** — no download, just click the link.
+
+## Running it yourself
 
 You need [Node.js](https://nodejs.org/) installed first.
 
